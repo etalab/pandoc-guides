@@ -2,6 +2,10 @@
 
 Export [guides](https://github.com/etalab/guides.etalab.gouv.fr) from guides.etalab.gouv.fr to PDF.
 
+## Example
+
+See [example.pdf](example.pdf).
+
 ## Installation
 
 Install [pandoc](https://pandoc.org) + [wkhtmltopdf](https://wkhtmltopdf.org/downloads.html). Requires Python 3.8
