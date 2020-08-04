@@ -1,3 +1,4 @@
+from datetime import date
 from pathlib import Path
 import re
 import os
@@ -30,6 +31,8 @@ def clean_lines(lines):
 
 
 def build_metadata(title):
+    date_str = date.today().strftime("%d/%m/%Y")
+
     return {
         # https://github.com/chdemko/pandoc-latex-environment
         'pandoc-latex-environment': {
@@ -46,7 +49,8 @@ def build_metadata(title):
         'lang': "fr",
         'title': title,
         'author': "Etalab",
-        'footer-center': 'Consultez la dernière version de ce guide sur guides.etalab.gouv.fr',
+        'date': date_str,
+        'footer-center': '\small Consultez la dernière version de ce guide sur guides.etalab.gouv.fr',
         'logo': 'logo.png',
     }
 
