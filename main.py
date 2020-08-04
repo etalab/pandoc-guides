@@ -92,10 +92,12 @@ def main(folder, title, output_path):
     os.makedirs(Path(output_path).parent, exist_ok=True)
 
     os.symlink(p / 'images/', Path('./images'))
+    # See https://pandoc.org/MANUAL.html
+    # especially "Markdown variants"
     os.system(f'''
     pandoc --toc -s tmp.md -o {output_path} \
       --template "eisvogel.latex" \
-      --from markdown \
+      --from markdown+lists_without_preceding_blankline \
       --filter pandoc-latex-environment
     ''')
 
