@@ -98,7 +98,8 @@ def main(folder, title, output_path):
     pandoc --toc -s tmp.md -o {output_path} \
       --template "eisvogel.latex" \
       --from markdown+lists_without_preceding_blankline \
-      --filter pandoc-latex-environment
+      --filter pandoc-latex-environment \
+      --pdf-engine=xelatex -V mainfont="DejaVu Sans"
     ''')
 
     # Clean up
