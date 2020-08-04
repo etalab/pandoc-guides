@@ -52,6 +52,9 @@ def build_metadata(title):
         'date': date_str,
         'footer-center': '\small Consultez la dernière version de ce guide sur guides.etalab.gouv.fr',
         'logo': 'logo.png',
+        'header-includes': [
+            '\\usepackage{coloremoji}',
+        ],
     }
 
 
@@ -98,8 +101,7 @@ def main(folder, title, output_path):
     pandoc --toc -s tmp.md -o {output_path} \
       --template "eisvogel.latex" \
       --from markdown+lists_without_preceding_blankline \
-      --filter pandoc-latex-environment \
-      --pdf-engine=xelatex -V mainfont="DejaVu Sans"
+      --filter pandoc-latex-environment
     ''')
 
     # Clean up
