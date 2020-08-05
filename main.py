@@ -1,3 +1,4 @@
+import unicodedata
 from datetime import date
 from pathlib import Path
 import re
@@ -5,6 +6,23 @@ import os
 
 import click
 import frontmatter
+from emoji import unicode_codes, get_emoji_regexp
+
+
+def emojify(string):
+    """
+    Find emojis in a string and replace them with an
+    inline Markdown image to Twemoji.
+
+    Handles multi-character emojis like flags (🇫🇷 = Ⓕ + Ⓡ)
+    """
+    def replace(match):
+        cdn_fmt = "https://twemoji.maxcdn.com/v/latest/72x72/{codes}.png"
+        # {:x} gives hex
+        url = cdn_fmt.format(codes='-'.join([f'{ord(c):x}' for c in match.group(0)]))
+        return f'!["Emoji"]({url}){{width=16 height=16}}'
+
+    return re.sub(u'\ufe0f', '', (get_emoji_regexp().sub(replace, string)))
 
 
 def clean_lines(lines):
@@ -13,7 +31,7 @@ def clean_lines(lines):
     pattern = re.compile(r'^::: (tip|warning|danger|lexique)(.*)')
 
     for i, line in enumerate(lines):
-        res[i] = line
+        res[i] = emojify(line)
 
         # Replace VuePress custom containers
         # https://vuepress.vuejs.org/guide/markdown.html#custom-containers
@@ -52,9 +70,6 @@ def build_metadata(title):
         'date': date_str,
         'footer-center': '\small Consultez la dernière version de ce guide sur guides.etalab.gouv.fr',
         'logo': 'logo.png',
-        'header-includes': [
-            '\\usepackage{coloremoji}',
-        ],
     }
 
 
