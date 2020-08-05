@@ -1,11 +1,11 @@
+import os
+import re
 from datetime import date
 from pathlib import Path
-import re
-import os
 
 import click
 import frontmatter
-from emoji import unicode_codes, get_emoji_regexp
+from emoji import get_emoji_regexp
 
 
 def emojify(string):
