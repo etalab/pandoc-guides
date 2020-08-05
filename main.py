@@ -1,4 +1,3 @@
-import unicodedata
 from datetime import date
 from pathlib import Path
 import re
