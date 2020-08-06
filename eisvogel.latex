@@ -583,6 +583,11 @@ $endif$
 
 
 %
+% link color
+%
+\definecolor{etalab-blue}{HTML}{0053b3}
+
+%
 % custom blocks
 %
 \definecolor{tip-background}{HTML}{F3F5F7}

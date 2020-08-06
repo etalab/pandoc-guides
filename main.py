@@ -44,6 +44,10 @@ def clean_lines(lines):
         if line.strip() == ':::':
             res[i] = '</div>\n'
 
+        # Remove VuePress table of contents
+        if line.strip() == '[[toc]]':
+            res[i] = ''
+
     return res
 
 
@@ -69,6 +73,10 @@ def build_metadata(title):
         'date': date_str,
         'footer-center': '\small Consultez la dernière version de ce guide sur guides.etalab.gouv.fr',
         'logo': 'logo.png',
+        'colorlinks': "true",
+        'linkcolor': "etalab-blue",
+        'urlcolor': "etalab-blue",
+        'numbersections': 'true',
     }
 
 
