@@ -16,12 +16,19 @@ def emojify(string):
     Handles multi-character emojis like flags (🇫🇷 = Ⓕ + Ⓡ)
     """
     def replace(match):
-        cdn_fmt = "https://twemoji.maxcdn.com/v/latest/72x72/{codes}.png"
+        def codepoint(codes):
+            # See https://github.com/twitter/twemoji/issues/419#issuecomment-637360325
+            if '200d' not in codes:
+                return '-'.join([c for c in codes if c != 'fe0f'])
+            return '-'.join(codes)
+        cdn_fmt = "https://twemoji.maxcdn.com/v/latest/72x72/{codepoint}.png"
         # {:x} gives hex
-        url = cdn_fmt.format(codes='-'.join([f'{ord(c):x}' for c in match.group(0)]))
+        url = cdn_fmt.format(
+            codepoint=codepoint([f'{ord(c):x}' for c in match.group(0)])
+        )
         return f'!["Emoji"]({url}){{width=16 height=16}}'
 
-    return re.sub(u'\ufe0f', '', (get_emoji_regexp().sub(replace, string)))
+    return get_emoji_regexp().sub(replace, string)
 
 
 def clean_lines(lines):
