@@ -26,3 +26,12 @@ Arguments are:
 - `src_folder`: the folder where Markdown files are;
 - `title`: title of the document;
 - `output_path`: of the generated PDF file.
+
+## Script details
+
+This repository is a Python CLI. The goal is to aggregate multiple Markdown files in a folder to produce a beautiful PDF.
+
+This script handles:
+- collecting multiple Markdown files into a single one;
+- converting non-standard Markdown: VuePress table of contents, emojis, custom blocks;
+- calling Pandoc with the appropriate options and parameters to produce a beautiful PDF file.
