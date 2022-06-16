@@ -1,4 +1,4 @@
 python-frontmatter==0.5.0
 -e git+https://github.com/chdemko/pandoc-latex-environment.git@89c86963aaa823e606d44bcdcf5340cf03350eac#egg=pandoc-latex-environment
 click==7.1.2
-emoji
+emoji==1.6.3
